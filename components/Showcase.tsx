@@ -6,11 +6,12 @@ const PromptText = "Turn him into a cyborg.";
 
 const Showcase = () => {
   return (
-    <motion.section className="mt-12 border rounded-md flex flex-row divide-x-2 divide-pink-400 h-full divide-dotted">
+    <motion.section className="mt-12 border rounded-md flex flex-row divide-x-2 divide-pink-400 h-full divide-dotted shadow-lg">
       <div className="p-8 flex flex-col gap-4 items-center">
         <Image
           src="/assets/images/example_before.jpeg"
           alt="image of alexander statue"
+          priority={true}
           width={256}
           height={256}
         />

@@ -14,32 +14,45 @@ const Prompt = () => {
   const [imageURL, setImageURL] = useState<string>();
   const inputRef = useRef<HTMLInputElement | null>(null);
 
-  const handleChange = async (file: File) => {
-    setFile(file);
+  const uploadImage = async () => {
+    if (!inputRef.current || !file) return;
+
     const file64 = await fileToBase64(file);
-    setStage(2);
+    const data = { file: file64, prompt: inputRef.current.value };
     try {
-      console.log(file64);
       const res = await fetch("/api/uploadImage", {
-        method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ hey: "hey" }),
+        method: "POST",
+        body: JSON.stringify(data),
       });
-      const URI = await res.json();
-      console.log(URI);
-      setImageURL(URI);
+
+      const responseBody = await res.json();
+      if (!responseBody.imageURL || responseBody.imageURL.length <= 0) {
+        setError("Model pool stage error");
+        return;
+      }
+      setImageURL(responseBody.imageURL[0]);
     } catch (e) {
+      console.error(e);
       setError("Uploading image failed");
     }
   };
 
+  // stage 1 handler
+  const handleFileUpload = async (file: File) => {
+    setFile(file);
+    setStage(2);
+  };
+
+  // stage 2 handler
   const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
-    if (!inputRef.current) return;
+    if (!inputRef.current || stage >= 3) return;
 
     if (e.key === "Enter") {
-      console.log("here");
+      setStage(3);
+      uploadImage();
     }
   };
 
@@ -63,16 +76,16 @@ const Prompt = () => {
         >
           {stage === 1 && (
             <FileUploader
-              handleChange={handleChange}
+              handleChange={handleFileUpload}
               name="file"
               label="Upload an image here"
               multiple={false}
               types={fileTypes}
             />
           )}
-          <div>
+          <div className="border rounded-md flex flex-row divide-x-2 divide-pink-400 h-full divide-dotted shadow-lg">
             {stage >= 2 && (
-              <div>
+              <div className={stage === 3 ? "p-8" : ""}>
                 <Image
                   src={file ? URL.createObjectURL(file) : ""}
                   alt={"user image"}
@@ -87,6 +100,16 @@ const Prompt = () => {
                   onKeyDown={handleKeyDown}
                 />
               </div>
+            )}
+            {stage === 3 && (
+              <motion.div className="" animate={{ padding: "2rem" }}>
+                <Image
+                  src={imageURL ? imageURL : "/assets/gif/wheel.gif"}
+                  alt="user prompt response"
+                  width={256}
+                  height={256}
+                />
+              </motion.div>
             )}
           </div>
         </motion.div>

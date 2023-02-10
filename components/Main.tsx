@@ -11,8 +11,9 @@ const Main = () => {
         <div className="relative my-10">
           <button
             className="px-4 py-2 rounded-md bg-gradient-to-tr from-blue-500 via-indigo-500 to-pink-400
-            border shadow-2xl font-semibold text-white opacity-80
-            hover:opacity-90 hover:text-white active:text-white active:opacity-100 transition-all duration-200"
+            border shadow-md font-semibold text-white animate-bg-gr-animate bg-[length:400%_400%]
+            hover:animate-none hover:-translate-y-[2px] transition-transform duration-100
+            active:shadow-lg active:-translate-y-[1px]"
             onClick={() => setStart(true)}
           >
             Start
