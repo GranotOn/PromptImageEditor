@@ -2,6 +2,9 @@
 
 A serverless NextJS app using that converts an image + prompt to an image, powered by `timothybrooks`'s awesome pix2pix model hosted on `replicate.com`
 
+![Animation](https://user-images.githubusercontent.com/58481800/218114684-e1e6faf3-9968-4596-83a7-cc3ea3ca849d.gif)
+
+
 # Contributing
 
 1. Clone
