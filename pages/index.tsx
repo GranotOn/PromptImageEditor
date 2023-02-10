@@ -7,7 +7,7 @@ import Showcase from "../components/Showcase";
 
 const Home: NextPage = () => {
   return (
-    <div className="flex min-h-screen flex-col items-center py-2 bg-slate-100">
+    <div className="flex min-h-screen flex-col items-center py-2 bg-slate-100 font-sans">
       <Head>
         <title>Prompt Image Editor</title>
         <link rel="icon" href="/favicon.ico" />

@@ -103,7 +103,7 @@ const Prompt = () => {
             )}
             {stage === 3 && (
               <motion.div
-                className="flex items-center align-center"
+                className={!imageURL ? "flex items-center align-center" : ""}
                 animate={{ padding: "2rem" }}
               >
                 <Image
