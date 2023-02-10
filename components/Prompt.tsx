@@ -102,12 +102,15 @@ const Prompt = () => {
               </div>
             )}
             {stage === 3 && (
-              <motion.div className="" animate={{ padding: "2rem" }}>
+              <motion.div
+                className="flex items-center align-center"
+                animate={{ padding: "2rem" }}
+              >
                 <Image
                   src={imageURL ? imageURL : "/assets/gif/wheel.gif"}
                   alt="user prompt response"
-                  width={256}
-                  height={256}
+                  width={imageURL ? 256 : 64}
+                  height={imageURL ? 256 : 64}
                 />
               </motion.div>
             )}
