@@ -5,7 +5,7 @@ const Footer = () => {
     <footer className="flex h-24 w-full mt-auto items-center justify-center border-t ">
       <a
         className="flex items-center justify-center gap-2 text-sm font-semibold font-serif"
-        href="https://github.com/OwenGranot"
+        href="https://github.com/GranotOn"
         target="_blank"
         rel="noopener noreferrer"
       >
